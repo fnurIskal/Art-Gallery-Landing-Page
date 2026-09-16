@@ -1,0 +1,6 @@
+.git
+.env
+node_modules
+design
+storage/cache/*.json
+storage/logs/*.log

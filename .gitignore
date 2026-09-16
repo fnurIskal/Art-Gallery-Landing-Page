@@ -1,0 +1,14 @@
+/.env
+/node_modules/
+/.pnpm-store/
+/vendor/
+/storage/cache/*.json
+/storage/logs/*.log
+/storage/sessions/*
+!/storage/sessions/.gitkeep
+!.gitkeep
+.DS_Store
+Thumbs.db
+
+# Optimize edilmis kopyalari public/assets/images altinda; ham kaynaklar Git disinda tutulur.
+/design/assets/source-images/

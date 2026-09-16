@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-museum}
+      MYSQL_USER: ${DB_USERNAME:-museum}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-museum}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-local-root-only}
+    ports:
+      - "3307:3306"
+    volumes:
+      - museum_mysql:/var/lib/mysql
+      - ./database/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASSWORD:-local-root-only}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  museum_mysql:
