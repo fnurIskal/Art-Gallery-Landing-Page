@@ -12,3 +12,6 @@ Thumbs.db
 
 # Optimize edilmis kopyalari public/assets/images altinda; ham kaynaklar Git disinda tutulur.
 /design/assets/source-images/
+
+# Vercel statik dışa aktarım çıktısı
+/dist-vercel/

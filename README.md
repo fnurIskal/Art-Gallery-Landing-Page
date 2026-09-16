@@ -57,6 +57,21 @@ php -S 127.0.0.1:8080 -t public public/router.php
 
 Tarayıcıda `http://127.0.0.1:8080` adresini açın. `php.ini` içinde `;extension=pdo_mysql` satırının başındaki `;` kaldırılmış olmalıdır.
 
+### 1.3 Canlı önizleme (Vercel, yalnızca frontend)
+
+Arayüzün herkese açık demosu: **https://mersin-modern-landing.vercel.app**
+
+Vercel PHP ve MySQL çalıştırmadığı için bu yayın statik bir dışa aktarımdır: sayfa çalışan uygulamadan render edilip `dist-vercel/` klasörüne alınır, `/api/contact` ise PHP validator’ın kurallarını birebir uygulayan ama hiçbir şey kaydetmeyen küçük bir Node fonksiyonuyla karşılanır. Form gönderiminde toast bunun demo ortamı olduğunu açıkça söyler. Tam sürüm (PHP + MySQL kaydı) Docker kurulumudur.
+
+Yeniden yayınlamak için uygulama Docker’da çalışırken:
+
+```bash
+node scripts/export-static.mjs
+cd dist-vercel && vercel deploy --prod --yes
+```
+
+Kaynak dosyalar `deploy/vercel/` altındadır; `dist-vercel/` Git dışındadır.
+
 ---
 
 ## 2. MySQL kurulumu ve doğrulama
